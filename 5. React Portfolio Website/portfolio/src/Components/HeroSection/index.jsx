@@ -1,81 +1,61 @@
-import React from 'react';
-import styled from "styled-components";
+import React from "react";
+import HeroBgAnimation from "../HeroBgAnimation";
+import {
+  HeroContainer,
+  HeroBg,
+  HeroLeftContainer,
+  Img,
+  HeroRightContainer,
+  HeroInnerContainer,
+  TextLoop,
+  Title,
+  Span,
+  SubTitle,
+  SocialMediaIcons,
+  SocialMediaIcon,
+  ResumeButton,
+} from "./HeroStyle";
+import HeroImg from "../../images/HeroImage.jpg";
+import Typewriter from "typewriter-effect";
+import { Bio } from "../../data/constants";
 
-const HeroContainer = styled.div`
-  background-color: ${({ theme }) => theme.card_light};
-  display: flex;
-  justify-content: center;
-  position: relative;
-  padding: 80opx 30px;
-
-  @media screen and (max-width: 960px){
-    padding: 66px 16px;
-  }
-
-  @media screen and (max-width: 640px){
-    padding: 32px 16px;
-  }
-
-  z-index: 1;
-
-  clip-path: polygon(0 0, 100% 0, 100% 100%, 70% 95%, 0 100%);
-`;
-
-const HeroBg = styled.div`
-  position: absolute;
-  display: flex;
-  justify-content: end;
-  top: 50%;
-  right: 0;
-  bottom: 0;
-  left: 50%;
-  overflow: hidden;
-  width: 100%;
-  height: 100%;
-  padding: 0 30px;
-  -webkit-transform: translateX(-50%) translateY(-50%);
-  transform : translateX(-50%) translateY(-50%);
-
-  @media screen and (max-width: 960px){
-    padding: 0 0px;
-    justify-content: center;
-  }
-`;
-
-const HeroInnerContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  max-width: 1100px;
-
-  @media screen and (max-width: 960px){
-    flex-direction: column;
-  }
-`;
-
-const HeroLeftContainer = styled.div`
-  
-`;
-
-const Hero = () => {
+const HeroSection = () => {
   return (
-    <div id='about'>
+    <div id="about">
       <HeroContainer>
         <HeroBg>
-          <HeroInnerContainer>
-            <HeroLeftContainer>
-
-            </HeroLeftContainer>
-            
-            <HeroRightContainer>
-
-            </HeroRightContainer>
-          </HeroInnerContainer>
+          <HeroBgAnimation />
         </HeroBg>
+        <HeroInnerContainer>
+          <HeroLeftContainer id="Left">
+            <Title>
+              Hi, I am <br /> {Bio.name}
+            </Title>
+            <TextLoop>
+              I am a
+              <Span>
+                <Typewriter
+                  options={{
+                    strings: Bio.roles,
+                    autoStart: true,
+                    loop: true,
+                  }}
+                />
+              </Span>
+            </TextLoop>
+            <SubTitle>{Bio.description}</SubTitle>
+            <ResumeButton href={Bio.resume} target="display">
+              Check Resume
+            </ResumeButton>
+          </HeroLeftContainer>
+
+          <HeroRightContainer id="Right">
+            <Img src={HeroImg} alt="hero-image" />
+          </HeroRightContainer>
+        </HeroInnerContainer>
       </HeroContainer>
     </div>
-  )
-}
+  );
+};
 
-export default Hero
+export default HeroSection;
